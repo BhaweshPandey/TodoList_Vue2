@@ -2,7 +2,7 @@
   <div id="app">
     <div class="section">
       <div class="container">
-        <TodoItem :todos="todos" @addTodo="addTodo" @onComplete="completed" @onDelete="deletetodo" />
+        <TodoItem :todos="todos" @addTodo="addTodo" @onDelete="deletetodo" />
       </div>
     </div>
   </div>
@@ -63,10 +63,6 @@ export default {
        let deleted_todos = this.todos.filter(todo => todo.id != id);
       // this.todos.splice(id, 1);
        this.todos = deleted_todos;
-    },
-    completed(id) {
-      const updated_todos = this.todos.map(todo => todo.id == id ? Object.assign(todo, { completed: true }) : todo);
-      this.todos = updated_todos;
     },
   },
   mounted() {

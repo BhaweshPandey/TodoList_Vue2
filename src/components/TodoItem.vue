@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="column is-6 is-offset-3" v-for="(item, i) in todos" :key="i">
-      <div class="box todo_box" @click="$emit('onComplete', item.id)">
+      <div class="box todo_box">
         <span >{{ item.name }}</span>
         <button class="button is-danger is-small is-pulled-right" @click="$emit('onDelete', item.id)">Delete</button>
       </div>
