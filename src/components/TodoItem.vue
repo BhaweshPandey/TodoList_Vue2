@@ -6,7 +6,7 @@
           <div class="field">
             <label class="label">Add Your Todo</label>
             <div class="control">
-              <input class="input" v-model="title" type="text" placeholder="Enter Your todo.." />
+              <input class="input" v-model="name" type="text" placeholder="Enter Your todo.." />
             </div>
           </div>
         </form>
@@ -14,7 +14,7 @@
     </div>
     <div class="column is-6 is-offset-3" v-for="(item, i) in todos" :key="i">
       <div class="box todo_box" @click="$emit('onComplete', item.id)">
-        <span :class="{ completed: todos.completed }">{{ item.title }}</span>
+        <span >{{ item.name }}</span>
         <button class="button is-danger is-small is-pulled-right" @click="$emit('onDelete', item.id)">Delete</button>
       </div>
     </div>
@@ -28,18 +28,17 @@ export default {
   props: ["todos"],
   data() {
     return {
-      title: ''
+      name: ''
     }
   },
   methods: {
     onSubmit() {
       const new_todo = {
-        title: this.title,
-        completed: false,
+        name: this.name,
         id: shortid.generate()
       };
       this.$emit("addTodo", new_todo);
-      this.title = "";
+      this.name = "";
     },
   },
 };
