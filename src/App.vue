@@ -1,17 +1,70 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="section">
+      <div class="container">
+        <TodoItem :todos="todos" @addTodo="addTodo" @onComplete="completed" @onDelete="deletetodo" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import "bulma/css/bulma.css";
+import TodoItem from './components/TodoItem.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    TodoItem,
+  },
+  data() {
+    return {
+      todos: [
+        {
+          "userId": 1,
+          "id": 1,
+          "title": "delectus aut autem",
+          "completed": false
+        },
+        {
+          "userId": 1,
+          "id": 2,
+          "title": "quis ut nam facilis et officia qui",
+          "completed": false
+        },
+        {
+          "userId": 1,
+          "id": 3,
+          "title": "fugiat veniam minus",
+          "completed": false
+        },
+        {
+          "userId": 1,
+          "id": 4,
+          "title": "et porro tempora",
+          "completed": true
+        },
+        {
+          "userId": 1,
+          "id": 5,
+          "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
+          "completed": false
+        },
+      ]
+    }
+  },
+  methods: {
+    addTodo(todo) {
+      this.todos.unshift(todo)
+    },
+    deletetodo(id) {
+       let deleted_todos = this.todos.filter(todo => todo.id != id);
+      // this.todos.splice(id, 1);
+       this.todos = deleted_todos;
+    },
+    completed(id) {
+      const updated_todos = this.todos.map(todo => todo.id == id ? Object.assign(todo, { completed: true }) : todo);
+      this.todos = updated_todos;
+    }
   }
 }
 </script>
